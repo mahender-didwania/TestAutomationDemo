@@ -1,0 +1,40 @@
+{
+  "name": "e2e",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@badeball/cypress-cucumber-preprocessor": "^21.0.3",
+    "@bahmutov/cypress-esbuild-preprocessor": "^2.2.3",
+    "@cypress/browserify-preprocessor": "^3.0.2",
+    "cucumber": "^6.0.7",
+    "cucumber-html-reporter": "^7.2.0",
+    "cypress": "^13.16.0",
+    "cypress-mochawesome-reporter": "^3.8.2",
+    "multiple-cucumber-html-reporter": "^3.8.0"
+  },
+  "cypress-cucumber-preprocessor": {
+    "stepsDefinitions": "./cypress/support/step_definitions/*.js",
+    "nonGlobalStepDefinitions": false,
+    "html": {
+      "enabled": true
+    },
+    "json": {
+      "enabled": true,
+      "formatter": "./cucumber-json-formatter",
+      "output": "./cypress/results/preprocessor-generated/results.json"
+    },
+    "cucumberJson": {
+      "generate": true,
+      "outputFolder": "/home/mahender/IdeaProjects/TestAutomationDemo/testdemo/src/test/e2e/cypress/results/",
+      "filePrefix": "",
+      "fileSuffix": ".json"
+    }
+  }
+}
