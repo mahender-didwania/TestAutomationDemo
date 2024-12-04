@@ -2,9 +2,10 @@ const createEsbuildPlugin = require("@badeball/cypress-cucumber-preprocessor/esb
 const createBundler = require("@bahmutov/cypress-esbuild-preprocessor");
 const {
     addCucumberPreprocessorPlugin,
-    afterRunHandler,
+    // afterRunHandler,
 } = require('@badeball/cypress-cucumber-preprocessor');
 const fs = require("fs");
+const path = require('path');
 
 module.exports = {
     e2e: {
@@ -37,17 +38,19 @@ module.exports = {
             //         );
             //     }
             // });
-
             return config;
         },
+
         reporter: 'mochawesome',
         reporterOptions: {
-            reportDir: 'cypress/results',
-            overwrite: true,
+            reportDir: 'cypress/reports/mochawesome',
+            overwrite: false,
             html: true,
             json: true,
+            charts: true,
         },
+
         specPattern:
-            "**/*.feature", // Your .feature file pattern
+            "**/*.feature",
     },
 };
