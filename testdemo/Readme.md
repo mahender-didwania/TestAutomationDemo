@@ -1,4 +1,4 @@
-# Software arrangement
+# Demo Test Assignment
 
 ## AUT (Application Under Test)
 
@@ -23,7 +23,9 @@
 
 ## Test demonstration/assignment
 
-# For those who prefer Javascript/Typescript/Cypress/Cucumber
+### For those who prefer Javascript/Typescript/Cypress/Cucumber
+
+#### The Cypress/Cucumber UI tests
 
 * To run Cypress tests, after meeting the pre-requisites of installed software
   * To install needed packages
@@ -49,9 +51,23 @@
   * The reports can be viewed in `testdemo/src/test/e2e/cypress/reports`, i.e., the `cypress/reports` sub-directory
     from where you ran the tests.
 
-# For those who prefer Java/JUnit/Selenium/Cucumber
+#### The cucumber-js/rest-assured-ts API tests
 
-## The Cypress/Cucumber UI tests
+* These are run using:
+  * `npm run apiTag` for the tests with @api tag
+  * `npm run testTag` for the tests with @test tag
+  * `npm run test` for running without taking into account the tag
+  * Similar to the Cypress tests, the reports can afterwards be generated using
+    To generate reports using the `multiple-cucumber-html-reporter`:
+      ```
+       node generate-html-report.js
+      ```
+    To generate reports using the `cucumber-html-reporter`:
+      ```
+      node cucumber-html-report.js
+      ```
+
+### For those who prefer Java/JUnit/Selenium/Cucumber
 
 * The project arrangement consists of a Maven parent POM with common configuration; and a child test module
 * Please add Chrome binary to `testdemo/src/test/recources/` so it will sit in the sub-directory `chrome-linux64` there,
@@ -73,25 +89,9 @@
   * Similar for individual API (`cucumber-report-api`) and UI (`cucumber-report-selenium`) test runs in case those
     runs were executed
 
-## The cucumber-js/rest-assured-ts API tests
+## Key takeaways
 
-* These are run using:
-  * `npm run apiTag` for the tests with @api tag
-  * `npm run testTag` for the tests with @test tag
-  * `npm run test` for running without taking into account the tag
-  * Similar to the Cypress tests, the reports can afterwards be generated using
-    To generate reports using the `multiple-cucumber-html-reporter`:
-      ```
-       node generate-html-report.js
-      ```
-    To generate reports using the `cucumber-html-reporter`:
-      ```
-      node cucumber-html-report.js
-      ```
-
-# Key takeaways
-
-## Java/Selenium/Cucumber
+### Java/Selenium/Cucumber
 
 * Run in parallel at feature level
 * Can be run without running the API tests
@@ -99,28 +99,31 @@
 * Provide HTML report
 * Provide a timeline report to help see execution profile (feature in parallel, not scenarios)
 
-## API tests
+### API tests
 
 * Are run in parallel at feature level along with the tests above if run together
 * Can be run without running the UI tests
 * Use Rest Assured library
 
-## Javascript/Typescript tests
+### Javascript/Typescript tests
 
-### Cypress tests
+#### Cypress tests
 
 * Are run independently of the above tests
 * 4 types of reporting plugins are available - `cypress-mochawesome-reporter`, `multiple-cucumber-html-reporter`,
   `cucumber-html-reporter` and finally the report created by `cypress-cucumber-preprocessor`
 
-### rests-assured-ts tests
+#### rests-assured-ts tests
 
 * Are run using cucumber-js
 * Reporting is available via `multiple-cucumber-html-reporter` and `cucumber-html-reporter`
 
-# Software and platform needed
+## Software and platform needed
 
-## For Java/Maven/Selenium/Cucumber
+### For Javascript/typescript tests
+* npm, node, cypress and various modules and plugins for Cypress and cucumber-js/rest-assured-ts tests
+
+### For Java/Maven/Selenium/Cucumber
 
 * Java (`java` version 23 was used at runtime, `javac` version 21 was used for compiling - both default packaged
   versions with the OS)
@@ -131,9 +134,6 @@
 * IDE - IntelliJ IDEA
   * In general, check for paths and variable values in various build related files and shell scripts to adapt them to
     your own environment
-
-For Javascript/typescript tests
-* npm, node, cypress and various modules and plugins for Cypress and cucumber-js/rest-assured-ts tests
 
 ## Other considerations
 
