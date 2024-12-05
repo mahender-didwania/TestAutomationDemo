@@ -3,55 +3,55 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <title>Item List</title>
 </head>
 
 <body>
-    <h1>Item List</h1>
+<h1>Item List</h1>
 
-    <!-- Success or Error Message -->
-    <div id="message"></div>
+<!-- Success or Error Message -->
+<div id="message"></div>
 
-    <!-- Form to Add New Item -->
-    <h3>Add Item</h3>
-    <form id="add-item-form">
-        <label for="name">Item Name:</label><br>
-        <input type="text" id="name" name="name" required><br>
-        <label for="description">Description:</label><br>
-        <input type="text" id="description" name="description" required><br><br>
-        <button type="submit">Add Item</button>
-    </form>
+<!-- Form to Add New Item -->
+<h3>Add Item</h3>
+<form id="add-item-form">
+    <label for="name">Item Name:</label><br>
+    <input id="name" name="name" required type="text"><br>
+    <label for="description">Description:</label><br>
+    <input id="description" name="description" required type="text"><br><br>
+    <button type="submit">Add Item</button>
+</form>
 
-    <hr>
+<hr>
 
-    <!-- List of Items -->
-    <h3>Items:</h3>
-    <table id="items-list">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Description</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            <!-- Items will be injected here by JavaScript -->
-        </tbody>
-    </table>
+<!-- List of Items -->
+<h3>Items:</h3>
+<table id="items-list">
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- Items will be injected here by JavaScript -->
+    </tbody>
+</table>
 
-    <script>
-        // Fetch the list of items and display them
-        function loadItems() {
-            fetch('http://localhost:9090/items')
-                .then(response => response.json())
-                .then(items => {
-                    const itemsList = document.querySelector('#items-list tbody');
-                    itemsList.innerHTML = ''; // Clear current list
+<script>
+    // Fetch the list of items and display them
+    function loadItems() {
+        fetch('http://localhost:9090/items')
+            .then(response => response.json())
+            .then(items => {
+                const itemsList = document.querySelector('#items-list tbody');
+                itemsList.innerHTML = ''; // Clear current list
 
-                    items.forEach(item => {
-                        const row = document.createElement('tr');
-                        row.innerHTML = `
+                items.forEach(item => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
                             <td>${item.name}</td>
                             <td>${item.description}</td>
                             <td>
@@ -59,69 +59,69 @@
                                 <button onclick="deleteItem('${item.id}')">Delete</button>
                             </td>
                         `;
-                        itemsList.appendChild(row);
-                    });
+                    itemsList.appendChild(row);
                 });
+            });
+    }
+
+    // Add item
+    document.getElementById('add-item-form').addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        const name = document.getElementById('name').value;
+        const description = document.getElementById('description').value;
+
+        fetch('http://localhost:9090/items', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({name, description})
+        })
+            .then(response => {
+                if (response.ok) {
+                    document.getElementById('message').innerText = 'Item added successfully!';
+                    setTimeout(() => loadItems(), 1000);
+                    // loadItems();
+                } else {
+                    document.getElementById('message').innerText = 'Failed to add item.';
+                }
+            });
+    });
+
+    // Delete item
+    function deleteItem(id) {
+        fetch(`http://localhost:9090/items/${id}`, {
+            method: 'DELETE',
+        })
+            .then(response => {
+                if (response.ok) {
+                    document.getElementById('message').innerText = 'Item deleted successfully!';
+                    loadItems(); // Reload the item list after 1 second
+                    // setTimeout(() => loadItems(), 2000); // Reload the item list after 1 second
+                } else {
+                    document.getElementById('message').innerText = 'Failed to delete item.';
+                }
+            });
+    }
+
+    // Edit item
+    function editItem(id) {
+        // Redirect to update page with item ID
+        window.location.href = `/update.html?id=${id}`;
+    }
+
+    // Load items on page load
+    // Check for the message query parameter and display it
+    window.onload = function () {
+        const urlParams = new URLSearchParams(window.location.search);
+        const message = urlParams.get('message');
+        if (message) {
+            document.getElementById('message').innerText = message;
         }
-
-        // Add item
-        document.getElementById('add-item-form').addEventListener('submit', function (e) {
-            e.preventDefault();
-
-            const name = document.getElementById('name').value;
-            const description = document.getElementById('description').value;
-
-            fetch('http://localhost:9090/items', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ name, description })
-            })
-                .then(response => {
-                    if (response.ok) {
-                        document.getElementById('message').innerText = 'Item added successfully!';
-                        setTimeout(() => loadItems(), 1000);
-                        // loadItems(); 
-                    } else {
-                        document.getElementById('message').innerText = 'Failed to add item.';
-                    }
-                });
-        });
-
-        // Delete item
-        function deleteItem(id) {
-            fetch(`http://localhost:9090/items/${id}`, {
-                method: 'DELETE',
-            })
-                .then(response => {
-                    if (response.ok) {
-                        document.getElementById('message').innerText = 'Item deleted successfully!';
-                        loadItems(); // Reload the item list after 1 second
-                        // setTimeout(() => loadItems(), 2000); // Reload the item list after 1 second
-                    } else {
-                        document.getElementById('message').innerText = 'Failed to delete item.';
-                    }
-                });
-        }
-
-        // Edit item
-        function editItem(id) {
-            // Redirect to update page with item ID
-            window.location.href = `/update.html?id=${id}`;
-        }
-
-        // Load items on page load
-        // Check for the message query parameter and display it
-        window.onload = function () {
-            const urlParams = new URLSearchParams(window.location.search);
-            const message = urlParams.get('message');
-            if (message) {
-                document.getElementById('message').innerText = message;
-            }
-            loadItems(); // Load items after the page is loaded
-        };
-    </script>
+        loadItems(); // Load items after the page is loaded
+    };
+</script>
 </body>
 
 </html>

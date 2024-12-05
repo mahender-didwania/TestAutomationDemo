@@ -21,7 +21,7 @@ class UpdateItemPage {
         this.updateButton.click();
     }
 
-    verifyURI(){
+    verifyURI() {
         cy.url().should('include', '/update.html');
     }
 

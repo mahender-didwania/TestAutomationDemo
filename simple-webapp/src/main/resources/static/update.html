@@ -3,78 +3,78 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <title>Update Item</title>
 </head>
 
 <body>
-    <h1>Update Item</h1>
+<h1>Update Item</h1>
 
-    <!-- Form to Update Item -->
-    <h3>Item Details</h3>
-    <form id="update-item-form">
-        <input type="hidden" id="item-id" name="item-id"> <!-- Hidden field for item ID -->
-        <label for="name">Item Name:</label><br>
-        <input type="text" id="name" name="name" required><br>
-        <label for="description">Description:</label><br>
-        <input type="text" id="description" name="description" required><br><br>
-        <button type="submit">Update Item</button>
-    </form>
+<!-- Form to Update Item -->
+<h3>Item Details</h3>
+<form id="update-item-form">
+    <input id="item-id" name="item-id" type="hidden"> <!-- Hidden field for item ID -->
+    <label for="name">Item Name:</label><br>
+    <input id="name" name="name" required type="text"><br>
+    <label for="description">Description:</label><br>
+    <input id="description" name="description" required type="text"><br><br>
+    <button type="submit">Update Item</button>
+</form>
 
-    <div id="message"></div> <!-- Success or error message -->
+<div id="message"></div> <!-- Success or error message -->
 
-    <script>
-        // Get the item ID from the query string (URL)
-        const urlParams = new URLSearchParams(window.location.search);
-        const itemId = urlParams.get('id'); // Expecting 'id' as the query parameter
+<script>
+    // Get the item ID from the query string (URL)
+    const urlParams = new URLSearchParams(window.location.search);
+    const itemId = urlParams.get('id'); // Expecting 'id' as the query parameter
 
-        // Function to fetch and load item details into the form
-        function loadItem() {
-            fetch(`http://localhost:9090/items/${itemId}`)
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Item not found');
-                    }
-                    return response.json();
-                })
-                .then(item => {
-                    // Populate the form with the fetched item data
-                    document.getElementById('item-id').value = item.id;
-                    document.getElementById('name').value = item.name;
-                    document.getElementById('description').value = item.description;
-                })
-                .catch(error => {
-                    document.getElementById('message').innerText = `Error: ${error.message}`;
-                });
-        }
-
-        // Update the item
-        document.getElementById('update-item-form').addEventListener('submit', function (e) {
-            e.preventDefault();
-
-            const name = document.getElementById('name').value;
-            const description = document.getElementById('description').value;
-
-            fetch(`http://localhost:9090/items/${itemId}`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ name, description })
+    // Function to fetch and load item details into the form
+    function loadItem() {
+        fetch(`http://localhost:9090/items/${itemId}`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Item not found');
+                }
+                return response.json();
             })
-                .then(response => {
-                    if (response.ok) {
-                        // Redirect back to the list page with a success message
-                        window.location.href = `/index.html?message=Item%20updated%20successfully!`;
-                    } else {
-                        document.getElementById('message').innerText = 'Failed to update item.';
-                    }
-                });
-        });
+            .then(item => {
+                // Populate the form with the fetched item data
+                document.getElementById('item-id').value = item.id;
+                document.getElementById('name').value = item.name;
+                document.getElementById('description').value = item.description;
+            })
+            .catch(error => {
+                document.getElementById('message').innerText = `Error: ${error.message}`;
+            });
+    }
 
-        // Load the item details when the page loads
-        window.onload = loadItem;
-    </script>
+    // Update the item
+    document.getElementById('update-item-form').addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        const name = document.getElementById('name').value;
+        const description = document.getElementById('description').value;
+
+        fetch(`http://localhost:9090/items/${itemId}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({name, description})
+        })
+            .then(response => {
+                if (response.ok) {
+                    // Redirect back to the list page with a success message
+                    window.location.href = `/index.html?message=Item%20updated%20successfully!`;
+                } else {
+                    document.getElementById('message').innerText = 'Failed to update item.';
+                }
+            });
+    });
+
+    // Load the item details when the page loads
+    window.onload = loadItem;
+</script>
 </body>
 
 </html>

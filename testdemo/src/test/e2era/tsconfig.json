@@ -6,10 +6,13 @@
     "esModuleInterop": true,
     "alwaysStrict": false,
     "resolveJsonModule": true,
-    "module": "commonjs",
-    "target": "esnext",
     //    "module": "nodenext",
+    "module": "commonjs",
+    //    "module": "node16",
+    "target": "esnext",
+    //    "target": "es2020",
     //    "target": "es2017",
+    //    "moduleResolution": "node16",
     "lib": [
       "esnext",
       "DOM"
@@ -21,21 +24,19 @@
     "strictNullChecks": true,
     "baseUrl": "./types",
     "rootDirs": [
-      "./rest-assured-ts/support/step_definitions",
-      "./rest-assured-ts/support"
+      "./base/support/step_definitions",
+      "./base/support"
     ],
     "types": [
       "node"
     ],
     "typeRoots": [
-      "./node_modules/@types",
-      "./types"
+      "./node_modules/@types"
     ],
     "outDir": "build"
   },
   "include": [
-    "./rest-assured-ts/support/step_definitions/*.ts",
-    "./rest-assured-ts/support/step_definitions/*.ts"
+    "./base/support/step_definitions/*.ts"
   ],
   "exclude": [
     "node_modules"

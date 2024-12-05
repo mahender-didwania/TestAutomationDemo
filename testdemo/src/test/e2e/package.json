@@ -29,7 +29,7 @@
     },
     "json": {
       "enabled": true,
-      "output": "./cypress/results/preprocessor-generated/results.json"
+      "output": "./cypress/results/preprocessor-generated/results-cypress.json"
     }
   }
 }

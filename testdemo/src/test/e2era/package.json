@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "cucumber-rest-assured-typescript",
-  "description": "cucumber-rest-assured-typescript or cucumber rest-assured javascript",
+  "description": "cucumber-rest-assured",
   "version": "0.0.1",
   "license": "MIT",
   "author": {
@@ -10,13 +10,15 @@
     "url": "https://linkedin.com/in/mahender-didwania"
   },
   "scripts": {
+    "deps": "rimraf node_modules; rimraf package-lock.json; npm --save-dev install",
     "build": "npm run clean && tsc",
     "clean": "rimraf build",
     "clean-build": "npm run clean && npm run build",
-    "test": "cucumber-js rest-assured-ts/integration --require 'rest-assured-ts/support/hooks.js' --require 'rest-assured-ts/support/step_definitions/*.ts' -f json:rest-assured-ts/report/cucumber_report.json --require-module ts-node/register --exit",
-    "testTag": "cucumber-js rest-assured-ts/integration --tags '@test' --require 'rest-assured-ts/support/hooks.js' --require 'rest-assured-ts/support/step_definitions/*.ts' -f json:rest-assured-ts/report/cucumber_report.json --require-module ts-node/register --exit",
-    "apiTag": "cucumber-js rest-assured-ts/integration --tags '@api' --require 'rest-assured-ts/support/hooks.js' --require 'rest-assured-ts/support/step_definitions/*.ts' -f json:rest-assured-ts/report/cucumber_report.json --require-module ts-node/register --exit",
-    "report": "node rest-assured-ts/report/report.js"
+    "test": "cucumber-js base/integration --require 'base/support/hooks.js' --require 'base/support/step_definitions/*.ts' -f json:base/report/cucumber_report.json --require-module ts-node/register --exit",
+    "testTag": "cucumber-js base/integration --tags '@test' --require 'base/support/hooks.js' --require 'base/support/step_definitions/*.ts' -f json:base/results/cucumber_report.json --require-module ts-node/register --exit",
+    "allTag": "cucumber-js base/integration --tags '@api or @cypress' --require 'base/support/hooks.js' --require 'base/support/step_definitions/*.ts' -f json:base/results/cucumber_report.json --require-module ts-node/register --exit",
+    "apiTag": "cucumber-js base/integration --tags '@api' --require 'base/support/hooks.js' --require 'base/support/step_definitions/*.ts' -f json:rest-assured-ts/results/cucumber_report.json --require-module ts-node/register --exit",
+    "report": "node base/generate-html-report.ts"
   },
   "devDependencies": {
     "@cucumber/cucumber": "^11.1.0",
@@ -26,7 +28,10 @@
     "rest-assured-ts": "^0.1.8",
     "ts-node": "^10.9.2",
     "tunnel": "^0.0.6",
-    "typescript": "^5.7.2"
+    "typescript": "^5.7.2",
+    "cucumber-html-reporter": "^7.2.0",
+    "mochawesome-merge": "^4.3.0",
+    "multiple-cucumber-html-reporter": "^3.8.0"
   },
   "repository": {
     "type": "git",

@@ -1,6 +1,6 @@
-import { Given, When, Then } from "@badeball/cypress-cucumber-preprocessor";
-import ItemListPage from '../../../page_objects/ItemListPage';
-import UpdateItemPage from '../../../page_objects/UpdateItemPage';
+import {Given, Then, When} from "@badeball/cypress-cucumber-preprocessor";
+import ItemListPage from '../page_objects/ItemListPage';
+import UpdateItemPage from '../page_objects/UpdateItemPage';
 
 Given('I am on the item list page', () => {
     cy.visit('http://localhost:9090/index.html');
@@ -20,7 +20,7 @@ When("I add an item with name {string} and description {string}", (name, descrip
 
 Then("I should see the item with name {string} and description {string} in the list", (name, description) => {
     ItemListPage.getItemList()
-    .should("contain.text", name)
+        .should("contain.text", name)
         .and("contain.text", description);
 });
 

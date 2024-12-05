@@ -2,11 +2,11 @@ class ItemListPage {
     get addItemButton() {
         return cy.get('button[type="submit"]');
     }
-    
+
     get itemList() {
         return cy.get('#items-list');
     }
-    
+
     get message() {
         return cy.get('#message');
     }
@@ -15,15 +15,15 @@ class ItemListPage {
         this.addItemButton.click();
     }
 
-    clickUpdateForFirstMatchingItemName(itemName){
+    clickUpdateForFirstMatchingItemName(itemName) {
         cy.contains('td', itemName)
-        .parent()
-        .within(() => {
-            cy.contains('button', 'Update').click();
-        });
+            .parent()
+            .within(() => {
+                cy.contains('button', 'Update').click();
+            });
     }
 
-    addItemWithNameAndDescription(itemName, ItemDescription){
+    addItemWithNameAndDescription(itemName, ItemDescription) {
         cy.get("#name").clear().type(itemName);
         cy.get("#description").clear().type(ItemDescription);
         cy.get('button[type="submit"]').click();
@@ -34,7 +34,8 @@ class ItemListPage {
     }
 
     verifyItemAndDescriptionListed(itemName, description) {
-        this.itemList.contains('td', itemName).and.contains(description)
+        this.itemList.contains('td', itemName)
+        this.itemList.contains('td', description)
     }
 
     getMessage() {

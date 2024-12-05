@@ -1,6 +1,11 @@
-import static spark.Spark.*;
 import com.google.gson.Gson;
-import java.util.*;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
+
+import static spark.Spark.*;
 
 public class App {
     public static void main(String[] args) {
@@ -28,14 +33,14 @@ public class App {
         // Add a new item
         post("/items", (req, res) -> {
             Item item = new Gson().fromJson(req.body(), Item.class);
-        
+
             // Check for empty or null name and description
             if (item.getName() == null || item.getName().trim().isEmpty() ||
-                item.getDescription() == null || item.getDescription().trim().isEmpty()) {
+                    item.getDescription() == null || item.getDescription().trim().isEmpty()) {
                 res.status(400);
                 return "Name and description must not be empty";
             }
-        
+
             String id = UUID.randomUUID().toString();
             item.setId(id);
             items.put(id, item);
