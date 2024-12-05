@@ -19,7 +19,7 @@
     clear
     messaging)
     * Pulling it from Docker: See the [Docker Hub page](https://hub.docker.com/r/compsoftdeveloper/simple-webapp),
-      pull [using](docker pull compsoftdeveloper/simple-webapp:item-app)
+      pull using `docker pull compsoftdeveloper/simple-webapp:item-app`
 
 ## Test demonstration/assignment
 
