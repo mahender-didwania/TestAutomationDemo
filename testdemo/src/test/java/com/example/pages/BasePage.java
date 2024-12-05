@@ -1,18 +1,18 @@
 package com.example.pages;
 
-import java.time.Duration;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.time.Duration;
+
 public class BasePage {
+    private static final Logger logger = LoggerFactory.getLogger(BasePage.class);
+    public static Duration DEFAULT_WAIT_DURATION = Duration.ofSeconds(10);
     WebDriver driver;
     WebDriverWait wait;
-    public static Duration DEFAULT_WAIT_DURATION = Duration.ofSeconds(10);
-    private static final Logger logger = LoggerFactory.getLogger(BasePage.class);
 
     public BasePage(WebDriver driver) {
         if (null != driver) {

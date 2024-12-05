@@ -4,34 +4,44 @@ import com.example.pages.AddItemPage;
 import com.example.pages.ItemListPage;
 import com.example.pages.UpdateItemPage;
 import com.example.util.BrowserSetup;
-
 import io.cucumber.datatable.DataTable;
-import io.cucumber.java.en.*;
-
+import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import org.openqa.selenium.WebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import static org.junit.Assert.*;
 
 import java.time.Duration;
 import java.util.List;
 import java.util.Map;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 public class ItemStepDefinitions {
 
+    private static final Logger logger = LoggerFactory.getLogger(ItemStepDefinitions.class);
+    private final BrowserSetup browserSetup = new BrowserSetup();
+    private final int WAIT_PERIOD_SECONDS = 5;
+    private final String AUT_URI = "http://localhost:9090/index.html";
     private WebDriver driver;
     private ItemListPage itemListPage;
     private AddItemPage addItemPage;
     private UpdateItemPage updateItemPage;
-    private BrowserSetup browserSetup = new BrowserSetup();
-    private final int WAIT_PERIOD_SECONDS = 5;
-    private final String AUT_URI = "http://localhost:9090/index.html";
-    private static final Logger logger = LoggerFactory.getLogger(ItemStepDefinitions.class);
 
     @io.cucumber.java.BeforeAll
     public static void before_all() {
         BrowserSetup.setUpChromeDriverServer();
+    }
+
+    @io.cucumber.java.AfterAll
+    public static void after_all() {
+        tearDownAll();
+    }
+
+    public static void tearDownAll() {
+        BrowserSetup.doneAll();
     }
 
     @io.cucumber.java.Before
@@ -52,15 +62,6 @@ public class ItemStepDefinitions {
     @io.cucumber.java.After
     public void tearDown() {
         browserSetup.done();
-    }
-
-    @io.cucumber.java.AfterAll
-    public static void after_all() {
-        tearDownAll();
-    }
-
-    public static void tearDownAll() {
-        BrowserSetup.doneAll();
     }
 
     @Given("I navigate to the item list page")
@@ -107,6 +108,7 @@ public class ItemStepDefinitions {
     public void addItemsUsingDataTable(DataTable dataTable) {
         List<Map<String, String>> items = dataTable.asMaps(String.class, String.class);
         for (Map<String, String> item : items) {
+            logger.debug("Steps Java: {}", item.toString());
             addItemPage.addItem(item.get("Name"), item.get("Description"));
         }
     }

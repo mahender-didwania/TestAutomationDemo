@@ -21,21 +21,49 @@ import java.util.Random;
 
 public class BrowserSetup {
 
-    private static final Logger logger = LoggerFactory.getLogger(BrowserSetup.class);
-
-    public enum ChosenDriver {
-        FIREFOX,
-        CHROME,
-        CHROME_SERVER
-    }
-
     public static final ChosenDriver DEFAULT_DRIVER = BrowserSetup.ChosenDriver.FIREFOX;
+    private static final Logger logger = LoggerFactory.getLogger(BrowserSetup.class);
     private static ChromeDriverService service;
     private static ChosenDriver chosenDriver;
     JavascriptExecutor js;
     private WebDriver driver;
     private WebDriverWait wait;
     private boolean setUpDone = false;
+
+    public static synchronized boolean setUpChromeDriverServer() {
+        if (null == service) {
+            try {
+                service = new ChromeDriverService.Builder()
+                        .usingDriverExecutable(new File("src/test/resources/chromedriver"))
+                        .usingAnyFreePort()
+                        .build();
+                logger.debug("Attempting to start Chrome driver service");
+                service.start();
+                return true;
+            } catch (IOException e) {
+                logger.error("Failed to set up chrome driver service: {}", e.getMessage());
+            }
+        }
+        return service.isRunning();
+    }
+
+    public static void stopChromeServer() {
+        service.stop();
+    }
+
+    public static void doneAll() {
+        if (chosenDriver.equals(ChosenDriver.CHROME_SERVER)) {
+            stopChromeServer();
+        }
+    }
+
+    public static String getRandomCustomUA() {
+        String[] UAs = new String[]{
+                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.159 Safari/537.36",
+                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
+                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36"};
+        return Arrays.asList(UAs).get(new Random().nextInt(0, UAs.length));
+    }
 
     public void setUp(Duration timeout) {
         setUp(chosenDriver == null ? DEFAULT_DRIVER : chosenDriver, timeout);
@@ -61,25 +89,6 @@ public class BrowserSetup {
 
         postSetup();
 
-    }
-
-    public static synchronized boolean setUpChromeDriverServer() {
-        if (null == service) {
-            try {
-                service = new ChromeDriverService.Builder()
-                        .usingDriverExecutable(new File("src/test/resources/chromedriver"))
-                        .usingAnyFreePort()
-                        .build();
-                logger.debug("Attempting to start Chrome driver service");
-                service.start();
-                return true;
-            } catch (IOException e) {
-                logger.error("Failed to set up chrome driver service: {}", e.getMessage());
-            }
-        }
-        if (service.isRunning())
-            return true;
-        return false;
     }
 
     private void setUpChromeDriverUsingService(Duration timeout) {
@@ -142,18 +151,8 @@ public class BrowserSetup {
         return options;
     }
 
-    public static void stopChromeServer() {
-        service.stop();
-    }
-
     public void done() {
         driver.quit();
-    }
-
-    public static void doneAll() {
-        if (chosenDriver.equals(ChosenDriver.CHROME_SERVER)) {
-            stopChromeServer();
-        }
     }
 
     public void setUpExplicitWait(Duration duration) {
@@ -162,14 +161,6 @@ public class BrowserSetup {
 
     public WebDriverWait getConfiguredWait() {
         return wait;
-    }
-
-    public static String getRandomCustomUA() {
-        String[] UAs = new String[] {
-                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.159 Safari/537.36",
-                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
-                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36" };
-        return Arrays.asList(UAs).get(new Random().nextInt(0, UAs.length));
     }
 
     public WebDriver getDriver() {
@@ -182,5 +173,11 @@ public class BrowserSetup {
 
     public ChosenDriver getChosenDriver() {
         return chosenDriver;
+    }
+
+    public enum ChosenDriver {
+        FIREFOX,
+        CHROME,
+        CHROME_SERVER
     }
 }

@@ -1,20 +1,19 @@
 package com.example.pages;
 
-import java.util.List;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+import java.util.List;
+
 public class ItemListPage extends BasePage {
 
+    private final By messageDiv = By.id("message");
+    private final By itemsList = By.id("items-list");
     @FindBy(id = "message")
     private WebElement anotherWayForMessageDiv;
-
-    private By messageDiv = By.id("message");
-    private By itemsList = By.id("items-list");
 
     // <button
     // onclick="editItem('0e155e2c-33c9-4bb7-92ce-b5ff0a9432fd')">Update</button>

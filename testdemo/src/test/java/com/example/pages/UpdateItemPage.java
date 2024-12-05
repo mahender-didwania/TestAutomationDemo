@@ -7,10 +7,10 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class UpdateItemPage extends BasePage {
 
-    private By itemNameInput = By.id("name");
-    private By itemDescriptionInput = By.id("description");
-    private By updateButton = By.xpath("//button[text()='Update Item']");
-    private By messageDiv = By.id("message");
+    private final By itemNameInput = By.id("name");
+    private final By itemDescriptionInput = By.id("description");
+    private final By updateButton = By.xpath("//button[text()='Update Item']");
+    private final By messageDiv = By.id("message");
 
     public UpdateItemPage(WebDriver driver) {
         super(driver);

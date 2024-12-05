@@ -7,9 +7,9 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class AddItemPage extends BasePage {
 
-    private By itemName = By.id("name");
-    private By itemDescription = By.id("description");
-    private By submitButton = By.cssSelector("button[type='submit']");
+    private final By itemName = By.id("name");
+    private final By itemDescription = By.id("description");
+    private final By submitButton = By.cssSelector("button[type='submit']");
 
     public AddItemPage(WebDriver driver) {
         super(driver);

@@ -20,7 +20,7 @@ import static io.cucumber.core.options.Constants.PLUGIN_PROPERTY_NAME;
 @SelectPackages("com.example")
 @ConfigurationParameter(key = GLUE_PROPERTY_NAME, value = "com.example")
 @ConfigurationParameter(key = PLUGIN_PROPERTY_NAME, value = "pretty, html:target/cucumber-report/cucumber.html, timeline:target/cucumber-report/")
-@IncludeTags({ "test", "api", "selenium", "cypress", "always" })
+@IncludeTags({"test", "api", "selenium", "cypress", "always"})
 public class RunCucumberAllTest {
-    
+
 }

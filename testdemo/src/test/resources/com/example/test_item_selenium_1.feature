@@ -12,13 +12,13 @@ Feature: Selenium - Item Management 1
   Scenario: Add multiple items using a data table
     Given I navigate to the item list page
     When I add the following items:
-      | Name           | Description                 |
-      | Item 10        | Description of Item 10      |
-      | Item 11        | Description of Item 11      |
-      | Item 12        | Description of Item 12      |
+      | Name    | Description            |
+      | Item 10 | Description of Item 10 |
+      | Item 11 | Description of Item 11 |
+      | Item 12 | Description of Item 12 |
     Then I should see all the items in the list:
-      | Name           | Description                 |
-      | Item 10        | Description of Item 10      |
-      | Item 11        | Description of Item 11      |
-      | Item 12        | Description of Item 12      |
+      | Name    | Description            |
+      | Item 10 | Description of Item 10 |
+      | Item 11 | Description of Item 11 |
+      | Item 12 | Description of Item 12 |
     Given I should see the success message "Item added successfully!"

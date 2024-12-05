@@ -1,6 +1,7 @@
 @api
 Feature: API Operations
 
+  @testapi
   Scenario: Add a new item
     When I create an item with name "Item21" and description "Description of Item21"
     Then I should receive a 201 status code

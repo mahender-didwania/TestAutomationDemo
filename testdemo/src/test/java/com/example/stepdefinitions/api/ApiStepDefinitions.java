@@ -1,17 +1,19 @@
-package com.example.stepdefinitions;
+package com.example.stepdefinitions.api;
 
 import com.example.api.ApiHelper;
-import io.cucumber.java.en.*;
+import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import io.restassured.response.Response;
-
-import static org.junit.Assert.*;
 
 import java.util.List;
 import java.util.Map;
 
+import static org.junit.Assert.*;
+
 public class ApiStepDefinitions {
 
-    private ApiHelper apiHelper = new ApiHelper();
+    private final ApiHelper apiHelper = new ApiHelper();
     private Response response;
     private String lastCreatedItemId; // Stores the ID of the last created item
 

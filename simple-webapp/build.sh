@@ -1,7 +1,7 @@
 #! /bin/sh
 
 java_home_dir=/usr/lib/jvm/default-java
-project_location=/home/mahender/VSSProjects
+project_location=/home/mahender/IdeaProjects/TestAutomationDemo/
 path=$PATH
 java_home=$JAVA_HOME
 

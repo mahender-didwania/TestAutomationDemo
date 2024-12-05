@@ -1,7 +1,9 @@
 #! /bin/sh
 
-while getopts "csa" opt; do
+while getopts "csaf" opt; do
   case "$opt" in
+    f) OPTION='-Dall.tests'
+      ;;
     c) OPTION='-Dcypress.tests'
       ;;
     s) OPTION='-Dselenium.tests'
@@ -14,7 +16,7 @@ while getopts "csa" opt; do
 done
 
 java_home_dir=/usr/lib/jvm/default-java
-project_location=/home/mahender/VSSProjects
+project_location=/home/mahender/IdeaProjects/TestAutomationDemo/
 path=$PATH
 java_home=$JAVA_HOME
 
