@@ -1,0 +1,43 @@
+{
+  "compilerOptions": {
+    "allowUnreachableCode": false,
+    "allowJs": true,
+    "forceConsistentCasingInFileNames": true,
+    "esModuleInterop": true,
+    "alwaysStrict": false,
+    "resolveJsonModule": true,
+    "module": "commonjs",
+    "target": "esnext",
+    //    "module": "nodenext",
+    //    "target": "es2017",
+    "lib": [
+      "esnext",
+      "DOM"
+    ],
+    //    "lib": ["es2017", "DOM"],
+    "strictBindCallApply": true,
+    "removeComments": true,
+    "strictPropertyInitialization": true,
+    "strictNullChecks": true,
+    "baseUrl": "./types",
+    "rootDirs": [
+      "./rest-assured-ts/support/step_definitions",
+      "./rest-assured-ts/support"
+    ],
+    "types": [
+      "node"
+    ],
+    "typeRoots": [
+      "./node_modules/@types",
+      "./types"
+    ],
+    "outDir": "build"
+  },
+  "include": [
+    "./rest-assured-ts/support/step_definitions/*.ts",
+    "./rest-assured-ts/support/step_definitions/*.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}

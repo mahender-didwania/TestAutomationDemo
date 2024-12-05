@@ -1,0 +1,35 @@
+{
+  "private": true,
+  "name": "cucumber-rest-assured-typescript",
+  "description": "cucumber-rest-assured-typescript or cucumber rest-assured javascript",
+  "version": "0.0.1",
+  "license": "MIT",
+  "author": {
+    "name": "Mahender",
+    "email": "mahender.didwania@gmail.com",
+    "url": "https://linkedin.com/in/mahender-didwania"
+  },
+  "scripts": {
+    "build": "npm run clean && tsc",
+    "clean": "rimraf build",
+    "clean-build": "npm run clean && npm run build",
+    "test": "cucumber-js rest-assured-ts/integration --require 'rest-assured-ts/support/hooks.js' --require 'rest-assured-ts/support/step_definitions/*.ts' -f json:rest-assured-ts/report/cucumber_report.json --require-module ts-node/register --exit",
+    "testTag": "cucumber-js rest-assured-ts/integration --tags '@test' --require 'rest-assured-ts/support/hooks.js' --require 'rest-assured-ts/support/step_definitions/*.ts' -f json:rest-assured-ts/report/cucumber_report.json --require-module ts-node/register --exit",
+    "apiTag": "cucumber-js rest-assured-ts/integration --tags '@api' --require 'rest-assured-ts/support/hooks.js' --require 'rest-assured-ts/support/step_definitions/*.ts' -f json:rest-assured-ts/report/cucumber_report.json --require-module ts-node/register --exit",
+    "report": "node rest-assured-ts/report/report.js"
+  },
+  "devDependencies": {
+    "@cucumber/cucumber": "^11.1.0",
+    "@types/chai": "^5.0.1",
+    "chai": "^4.3.4",
+    "nyc": "^17.1.0",
+    "rest-assured-ts": "^0.1.8",
+    "ts-node": "^10.9.2",
+    "tunnel": "^0.0.6",
+    "typescript": "^5.7.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:mahender-didwania/TestAutomationDemo.git"
+  }
+}
