@@ -121,6 +121,14 @@
 
 ## Software and platform needed
 
+### General
+
+* The OS platform for development was Linux (Debian style) running as WSL
+* Docker and its dependencies (OS packaged version)
+* IDE used - VSCode/IntelliJ IDEA
+  * In general, check for paths and variable values in various build related files and shell scripts to adapt them to
+    your own environment
+
 ### For Javascript/typescript tests
 * `npm`, `node`, `cypress` and various modules and plugins for Cypress and `cucumber-js`/`rest-assured-ts` tests
 
@@ -129,14 +137,9 @@
 * Java (`java` version 23 was used at runtime, `javac` version 21 was used for compiling - both default packaged
   versions with the OS)
 * Maven (version 3.8.8 was used)
-* Docker and its dependencies (OS packaged version)
 * Chrome binary, Firefox binary, Chrome driver and Gecko driver (downloaded from their respective websites)
-* The OS platform for development was Linux (Debian style) running as WSL
-* IDE - IntelliJ IDEA
-  * In general, check for paths and variable values in various build related files and shell scripts to adapt them to
-    your own environment
 
-## Other considerations
+#### Other considerations
 
 * For Maven to work correctly, JAVA_HOME must be set correctly when invoking the builds
   * Do not set a `Release` version for compiler higher than the `javac` version available 
