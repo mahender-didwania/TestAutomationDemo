@@ -15,9 +15,9 @@
     ``` 
   or
   `cd simple-webapp && sh ./build.sh` (edit `build.sh` for your own environment first if needed)
-  * please make sure beforehand that Maven has JAVA_HOME and PATH correctly set, else Maven can fail with not very
+  * Please make sure beforehand that Maven has JAVA_HOME and PATH correctly set, else Maven can fail with not very
     clear
-    messaging)
+    messaging
     * Pulling it from Docker: See the [Docker Hub page](https://hub.docker.com/r/compsoftdeveloper/simple-webapp),
       pull using `docker pull compsoftdeveloper/simple-webapp:item-app`
 
