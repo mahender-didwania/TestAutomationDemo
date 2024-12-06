@@ -57,12 +57,13 @@
   * `npm run apiTag` for the tests with @api tag
   * `npm run testTag` for the tests with @test tag
   * `npm run test` for running without taking into account the tag
-  * Similar to the Cypress tests, the reports can afterwards be generated using
-    To generate reports using the `multiple-cucumber-html-reporter`:
+  * Similar to the Cypress tests, the reports can afterwards be generated
+
+    * To generate reports using the `multiple-cucumber-html-reporter`:
       ```
        node generate-html-report.js
       ```
-    To generate reports using the `cucumber-html-reporter`:
+    * To generate reports using the `cucumber-html-reporter`:
       ```
       node cucumber-html-report.js
       ```
@@ -91,7 +92,20 @@
 
 ## Key takeaways
 
-### Java/Selenium/Cucumber
+### Javascript/Typescript tests
+
+#### Cypress tests
+
+* Are run independently of the Java and rest-assured-ts tests
+* 4 types of reporting plugins are available - `cypress-mochawesome-reporter`, `multiple-cucumber-html-reporter`,
+  `cucumber-html-reporter` and finally the report created by `cypress-cucumber-preprocessor`
+
+#### rest-assured-ts tests
+
+* Are run using `cucumber-js`
+* Reporting is available via `multiple-cucumber-html-reporter` and `cucumber-html-reporter`
+
+### Java/Selenium/Cucumber tests
 
 * Run in parallel at feature level
 * Can be run without running the API tests
@@ -105,23 +119,10 @@
 * Can be run without running the UI tests
 * Use Rest Assured library
 
-### Javascript/Typescript tests
-
-#### Cypress tests
-
-* Are run independently of the above tests
-* 4 types of reporting plugins are available - `cypress-mochawesome-reporter`, `multiple-cucumber-html-reporter`,
-  `cucumber-html-reporter` and finally the report created by `cypress-cucumber-preprocessor`
-
-#### rests-assured-ts tests
-
-* Are run using cucumber-js
-* Reporting is available via `multiple-cucumber-html-reporter` and `cucumber-html-reporter`
-
 ## Software and platform needed
 
 ### For Javascript/typescript tests
-* npm, node, cypress and various modules and plugins for Cypress and cucumber-js/rest-assured-ts tests
+* `npm`, `node`, `cypress` and various modules and plugins for Cypress and `cucumber-js`/`rest-assured-ts` tests
 
 ### For Java/Maven/Selenium/Cucumber
 
